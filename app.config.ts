@@ -1,5 +1,12 @@
 // Load environment variables with proper priority (system > .env)
-import "./scripts/load-env.js";
+// Skip during EAS Build to avoid Node.js API issues
+if (process.env.EAS_BUILD !== "true") {
+  try {
+    require("./scripts/load-env.js");
+  } catch (error) {
+    // Ignore errors during build
+  }
+}
 import type { ExpoConfig } from "expo/config";
 
 // Bundle ID format: space.manus.<project_name_dots>.<timestamp>

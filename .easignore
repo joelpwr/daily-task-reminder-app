@@ -1,0 +1,19 @@
+# Exclude server code from mobile builds
+server/
+drizzle/
+scripts/
+tests/
+
+# Exclude development files
+*.test.ts
+*.test.tsx
+vitest.config.ts
+
+# Exclude documentation
+*.md
+!README.md
+
+# Exclude build artifacts
+dist/
+.expo/
+node_modules/.cache/

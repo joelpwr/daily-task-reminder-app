@@ -50,7 +50,7 @@ export async function initializeStorage(): Promise<void> {
 /**
  * Get all tasks from storage.
  * Returns an empty array if no tasks exist.
- * Migrates old tasks to include category field if missing.
+ * Migrates old tasks to include category and priority fields if missing.
  */
 export async function getAllTasks(): Promise<Task[]> {
   try {
@@ -60,14 +60,15 @@ export async function getAllTasks(): Promise<Task[]> {
     }
     const tasks = JSON.parse(data) as Task[];
     
-    // Migration: Add category field to old tasks
+    // Migration: Add category and priority fields to old tasks
     const migratedTasks = tasks.map((task) => ({
       ...task,
       category: task.category || "personal", // Default to personal for old tasks
+      priority: task.priority || "medium",   // Default to medium priority for old tasks
     }));
     
     // Save migrated tasks if any were updated
-    const needsMigration = tasks.some((task) => !task.category);
+    const needsMigration = tasks.some((task) => !task.category || !task.priority);
     if (needsMigration) {
       await AsyncStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(migratedTasks));
     }

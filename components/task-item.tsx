@@ -55,6 +55,10 @@ export function TaskItem({
 }: TaskItemProps) {
   const colors = useColors();
 
+  // Provide defaults for old tasks without category/priority
+  const category = task.category || "personal";
+  const priority = task.priority || "medium";
+
   const handleCheckboxPress = (e: GestureResponderEvent) => {
     e.stopPropagation();
     onToggleComplete();
@@ -106,38 +110,38 @@ export function TaskItem({
             <View
               style={[
                 styles.categoryBadge,
-                { backgroundColor: CATEGORY_CONFIG[task.category].color + "20" },
+                { backgroundColor: CATEGORY_CONFIG[category].color + "20" },
               ]}
             >
               <Ionicons
-                name={CATEGORY_CONFIG[task.category].icon as any}
+                name={CATEGORY_CONFIG[category].icon as any}
                 size={12}
-                color={CATEGORY_CONFIG[task.category].color}
+                color={CATEGORY_CONFIG[category].color}
                 style={{ marginRight: 4 }}
               />
               <Text
                 style={[
                   styles.badgeText,
-                  { color: CATEGORY_CONFIG[task.category].color },
+                  { color: CATEGORY_CONFIG[category].color },
                 ]}
               >
-                {CATEGORY_CONFIG[task.category].label}
+                {CATEGORY_CONFIG[category].label}
               </Text>
             </View>
 
             <View
               style={[
                 styles.priorityBadge,
-                { backgroundColor: PRIORITY_CONFIG[task.priority].color + "20" },
+                { backgroundColor: PRIORITY_CONFIG[priority].color + "20" },
               ]}
             >
               <Text
                 style={[
                   styles.badgeText,
-                  { color: PRIORITY_CONFIG[task.priority].color },
+                  { color: PRIORITY_CONFIG[priority].color },
                 ]}
               >
-                {PRIORITY_CONFIG[task.priority].label}
+                {PRIORITY_CONFIG[priority].label}
               </Text>
             </View>
           </View>
