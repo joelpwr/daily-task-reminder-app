@@ -96,15 +96,7 @@ const config: ExpoConfig = {
   },
   plugins: [
     "expo-router",
-    [
-      "expo-notifications",
-      {
-        icon: "./assets/images/icon.png",
-        color: "#0a7ea4",
-        sounds: ["./assets/sounds/notification.wav"],
-        mode: "production",
-      },
-    ],
+    "expo-notifications",
     [
       "expo-audio",
       {
